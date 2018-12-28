@@ -1,0 +1,30 @@
+package com.pluralsight.main;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.util.SystemPropertyUtils;
+
+import com.pluralsight.service.CustomerService;
+
+public class Application {
+
+	public static void main(String[] args) {
+		
+		ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+		//CustomerService customerService = new CustomerServiceImpl();
+		
+		CustomerService service = appContext.getBean("customerService", CustomerService.class);
+		
+		System.out.println(service);
+		
+		CustomerService service2 = appContext.getBean("customerService", CustomerService.class);
+		
+		System.out.println(service2);
+		
+		System.out.println(service.findAll().get(0).getFirstname());
+		System.out.println(service.findAll().get(0).getLastname());
+
+	}
+
+}
